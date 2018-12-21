@@ -98,7 +98,7 @@ bool BosonVariation::getSupportsHwPseudoColor() const
 
 bool BosonVariation::getSupportsRadiometry()
 {
-    return false;
+    return true;
 }
 
 const QVideoSurfaceFormat BosonVariation::getDefaultFormat()
