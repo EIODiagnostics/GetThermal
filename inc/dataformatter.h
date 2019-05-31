@@ -4,6 +4,7 @@
 #include <QObject>
 #include <libuvc/libuvc.h>
 #include <QVideoFrame>
+#include "BosonCalibrator.hpp"
 
 typedef struct { const uint8_t colormap[256 * 3]; } colormap_t;
 
@@ -23,6 +24,7 @@ public:
     Q_ENUMS(Palette)
     Q_PROPERTY(Palette pseudocolorPalette MEMBER m_pseudocolor_palette NOTIFY psuedocolorPaletteChanged)
 
+    void Calibrate(uvc_frame_t *input_output);
     void FindMinMax(const uvc_frame_t *input, QPoint &minPoint, uint16_t &minVal, QPoint &maxPoint, uint16_t &maxVal) const;
     void AutoGain(uvc_frame_t *input_output);
     void FixedGain(uvc_frame_t *input_output, ushort minval, ushort maxval);
@@ -46,6 +48,7 @@ private:
 
     Palette m_pseudocolor_palette;
     ushort m_minVal, m_maxVal;
+    BosonCalibrator m_calibrator;
 };
 
 #endif // DATAFORMATTER_H

@@ -25,6 +25,24 @@ const colormap_t* DataFormatter::getPalette(Palette palette)
     }
 }
 
+
+void DataFormatter::Calibrate(uvc_frame_t *input_output) {
+    vector<double> temperature;
+    double scale = 10.0;
+    uint16_t fpaTemp = 28757;
+    m_calibrator.setEmissivity(0.99);
+    m_calibrator.setAmbientTemperature(22.0);
+
+    uint16_t * pixels = (unint16_t *) (input_output->data_bytes);
+    m_calibrator.calibrateFrame(input_output, fpaTemp, temperature);
+
+    uint16_t * pixels = (unint16_t *) (input_output->data_bytes);
+    for(auto index = 0; index < temperature.size(); index++) {
+        pixels[index] = temperature[index] * scale;
+    }
+}
+
+
 void DataFormatter::FindMinMax(const uvc_frame_t *input, QPoint &minPoint, uint16_t &minVal, QPoint &maxPoint, uint16_t &maxVal) const
 {
     uint8_t bytes_per_pixel = 0;

@@ -1,0 +1,5 @@
+P5
+# Boson 320 raw output, 320x256 pixels 14 bits per pixel
+320
+256
+65535

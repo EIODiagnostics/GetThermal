@@ -244,6 +244,7 @@ void UvcAcquisition::cb(uvc_frame_t *frame, void *ptr) {
 
         if (_this->m_uvc_format.pixelFormat() == QVideoFrame::Format_Y16)
         {
+            _this->m_df.Calibrate(frame);
             _this->m_df.AutoGain(frame);
             _this->m_df.Colorize(frame, qframe);
         }

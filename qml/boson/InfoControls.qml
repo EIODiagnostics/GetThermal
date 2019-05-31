@@ -43,6 +43,10 @@ Item {
             Label {
                 text: qsTr("Software: ") + acq.cci.softwareRev
             }
+
+            Label {
+                text: qsTr("FPA Temp: ") + acq.cci.cameraInternalTempC
+            }
         }
     }
 
