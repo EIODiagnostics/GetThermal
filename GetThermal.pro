@@ -2,6 +2,8 @@ exists($${OUT_PWD}/GetThermal.pro) {
     error("You must use shadow build (e.g. mkdir build; cd build; qmake ../GetThermal.pro).")
 }
 
+CONFIG+=sdk_no_version_check
+
 message(Qt version $$[QT_VERSION])
 
 !equals(QT_MAJOR_VERSION, 5) | !greaterThan(QT_MINOR_VERSION, 6) {
